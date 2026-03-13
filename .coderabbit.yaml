@@ -1,18 +1,16 @@
-# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-language: "en-US"
-early_access: false
 reviews:
-  profile: "chill"
-  request_changes_workflow: false
-  high_level_summary: true
-  poem: true
-  review_status: true
-  review_details: false
-  auto_review:
-    enabled: true
-    drafts: false
-    base_branches:
-      - main
-      - develop
-chat:
-  auto_reply: true
+  pre_merge_checks:
+    docstrings:
+      mode: "error"
+      threshold: 50
+    title:
+      mode: "warning"
+      requirements: "Start with an imperative verb; keep under 50 characters."
+    description:
+      mode: "error"
+    issue_assessment:
+      mode: "warning"
+    custom_checks:
+      - name: "Undocumented Breaking Changes"
+        mode: "warning"
+        instructions: "Pass/fail criteria: All breaking changes to public APIs, CLI flags, environment variables, configuration keys, database schemas, or HTTP/GraphQL endpoints must be documented in the Breaking Change section of the PR description and in CHANGELOG.md. Exclude purely internal or private changes (e.g., code not exported from package entry points or explicitly marked as internal)."
