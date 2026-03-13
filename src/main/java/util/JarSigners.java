@@ -24,7 +24,7 @@ public class JarSigners {
 	private Set<String> certs;
 	
 	public JarSigners(String folderName) {
-		this.folderName = folderName;
+		//this.folderName = folderName;
 		map = new HashMap<String, List<String>>();
 		certs = new HashSet<String>();
 	}
@@ -41,7 +41,6 @@ public class JarSigners {
 		for (String fileName : files) {
 			checkJarForCertificate(fileName);
 		}
-		//System.out.println("Certificates used to sign the jars: "+certs);
 		if (certs.size() > 1) {
 			System.out.println("WARNING: More that one certificate shows up in the jars!");
 		}
@@ -51,7 +50,6 @@ public class JarSigners {
 	private void checkJarForCertificate(String fileName) throws ZipException, IOException {
 		File jar = new File(folderName, fileName);
 		ZipFile zip = new ZipFile(jar);
-		//System.out.println("Processing "+fileName);
 		for (Enumeration entries = zip.entries(); entries.hasMoreElements();) {
 	        // Get the entry name
 	        String zipEntryName = ((ZipEntry)entries.nextElement()).getName();
