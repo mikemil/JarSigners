@@ -16,6 +16,7 @@ import java.util.zip.ZipFile;
 
 /**
  *  Show which jars are signed with which code signing certificates
+ *  @author Mike Miller
  */
 public class JarSigners {
 
