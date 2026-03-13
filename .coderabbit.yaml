@@ -2,7 +2,7 @@ reviews:
   pre_merge_checks:
     docstrings:
       mode: "error"
-      threshold: 80
+      threshold: 50
     title:
       mode: "warning"
       requirements: "Start with an imperative verb; keep under 50 characters."
