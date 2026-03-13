@@ -41,7 +41,7 @@ public class JarSigners {
 		for (String fileName : files) {
 			checkJarForCertificate(fileName);
 		}
-		System.out.println("Certificates used to sign the jars: "+certs);
+		//System.out.println("Certificates used to sign the jars: "+certs);
 		if (certs.size() > 1) {
 			System.out.println("WARNING: More that one certificate shows up in the jars!");
 		}
