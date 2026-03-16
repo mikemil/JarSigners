@@ -1,4 +1,8 @@
 reviews:
+  profile: "assertive"
+  high_level_summary: true
+  review_status: true
+  review_details: true
   pre_merge_checks:
     docstrings:
       mode: "error"
