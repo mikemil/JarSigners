@@ -16,7 +16,6 @@ import java.util.zip.ZipFile;
 
 /**
  *  Show which jars are signed with which code signing certificates
- *  @author Mike Miller
  */
 public class JarSigners {
 
@@ -25,11 +24,22 @@ public class JarSigners {
 	private Set<String> certs;
 	
 	public JarSigners(String folderName) {
-		//this.folderName = folderName;
+		this.folderName = folderName;
 		map = new HashMap<String, List<String>>();
 		certs = new HashSet<String>();
 	}
 	
+	/**
+	 * Scans the configured folder for JAR files, records each JAR's signing certificate entries,
+	 * and prints a short report including the number of jars found, a warning if multiple distinct
+	 * certificates are detected, and the mapping of JAR file names to certificate entries.
+	 *
+	 * This method updates the instance fields `map` (jar -> list of certificate entries) and
+	 * `certs` (set of distinct certificate entries) and writes summary output to standard output.
+	 *
+	 * @throws ZipException if a JAR file is malformed or cannot be interpreted as a ZIP archive
+	 * @throws IOException  if an I/O error occurs while reading a JAR file or listing the folder
+	 */
 	public void listJarSigners() throws ZipException, IOException {
 		File dir = new File(folderName);
 		FilenameFilter filter = new FilenameFilter() {
@@ -42,6 +52,7 @@ public class JarSigners {
 		for (String fileName : files) {
 			checkJarForCertificate(fileName);
 		}
+		//System.out.println("Certificates used to sign the jars: "+certs);
 		if (certs.size() > 1) {
 			System.out.println("WARNING: More that one certificate shows up in the jars!");
 		}
@@ -51,6 +62,7 @@ public class JarSigners {
 	private void checkJarForCertificate(String fileName) throws ZipException, IOException {
 		File jar = new File(folderName, fileName);
 		ZipFile zip = new ZipFile(jar);
+		//System.out.println("Processing "+fileName);
 		for (Enumeration entries = zip.entries(); entries.hasMoreElements();) {
 	        // Get the entry name
 	        String zipEntryName = ((ZipEntry)entries.nextElement()).getName();
