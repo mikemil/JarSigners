@@ -1,6 +1,15 @@
 reviews:
   profile: "assertive"
-  high_level_summary: true
+  path_filters:
+    - "src/main/java/**/*.java"
+    - "src/test/java/**/*.java"
+  path_instructions:
+    - path: "src/test/java/**/*.java"
+      instructions: | 
+        - Follow Junit 5 best practices for test method naming, such as using descriptive names that clearly indicate the purpose of the test (e.g., `shouldReturnTrueWhenInputIsValid`). 
+        - Ensure that test methods are annotated with `@Test` and that any necessary setup or teardown methods are properly annotated with `@BeforeEach`, `@AfterEach`, `@BeforeAll`, or `@AfterAll`.
+        - Check for the use of appropriate assertions (e.g., `assertEquals`, `assertTrue`, `assertThrows`) to validate test outcomes, and ensure that tests are focused on a single behavior or scenario for clarity and maintainability.
+        - Check for proper use of Mockito for mocking dependencies in unit tests, ensuring that mocks are used appropriately to isolate the unit under test and that interactions with mocks are verified as needed.
   review_status: true
   review_details: true
   pre_merge_checks:
@@ -18,12 +27,5 @@ reviews:
       - name: "Undocumented Breaking Changes"
         mode: "warning"
         instructions: "Pass/fail criteria: All breaking changes to public APIs, CLI flags, environment variables, configuration keys, database schemas, or HTTP/GraphQL endpoints must be documented in the Breaking Change section of the PR description and in CHANGELOG.md. Exclude purely internal or private changes (e.g., code not exported from package entry points or explicitly marked as internal)."
-    code_generation:
-      unit_tests:
-      - path_instructions:
-      - path: "**/*.java"
-        instructions: |
-          Use JUnit 5 for testing framework.
-          Generate comprehensive test cases including edge cases and error conditions.
-          Use proper Java naming conventions for test methods.
-          Include appropriate assertions and mock objects where needed.
+
+  
